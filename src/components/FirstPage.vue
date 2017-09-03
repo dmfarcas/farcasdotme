@@ -1,9 +1,28 @@
 <template>
-  <div class="hello">
-    
-    <p>This is another terminal portfolio. Type 'pls stuff' for stuff.</p>
+  <div
+   v-if="!shouldTheSpinnerSpin"
+   class="hello border">
+    <pre>  
+     __                                         
+    / _|                                        
+    | |_ __ _ _ __ ___ __ _ ___   _ __ ___   ___ 
+    |  _/ _` | '__/ __/ _` / __| | '_ ` _ \ / _ \
+    | || (_| | | | (_| (_| \__ \_| | | | | |  __/
+    |_| \__,_|_|  \___\__,_|___(_)_| |_| |_|\___|                                                                             
+    </pre>
+    <p>{{ introMessage }}</p>
     <pre>{{ linesToBeDisplayed }}</pre> 
-    <span>$ </span><input autofocus v-on:keyup.enter="bamboozle" v-model="terminalText"></input>
+    
+    <div v-if="shouldTheInputWork">
+      <span>$ </span><input class="cursor" autofocus v-on:keyup.enter="bamboozle" v-model="terminalText"></input>
+    </div>
+  </div>
+
+  <div
+  class="spinner-is-spinning"
+  v-else>
+    <img src="../assets/loader.gif" alt="">
+    Loading ...
   </div>
 </template>
 
@@ -17,60 +36,100 @@ export default {
       terminalText: '',
       linesToBeDisplayed: '',
       counter: 0,
-      successCounter: null
+      successCounter: null,
+      shouldTheSpinnerSpin: false,
+      shouldTheInputWork: true,
+      introMessage: "Hello! Type 'help' for help."
     }
   },
   methods: {
-     bamboozle() {
-       this.linesToBeDisplayed += `$ ${this.terminalText}\n`;
+     scrollToBottom() { 
+       window.scrollTo(0, document.body.scrollHeight);
 
-       if (this.counter === 3) {
-         this.counter += 1;
-         this.linesToBeDisplayed += "> If you insist..."
-       } else if(this.terminalText === 'pls stuff') {
-         this.linesToBeDisplayed += "> Awesome! Going to the next view. Heeere it comes!"
+            },
+     goToPong() {
+       this.$router.push('pong')
+     },
+     bamboozle() {
+       if (!this.shouldTheInputWork) return;
+
+       this.linesToBeDisplayed += `$ ${this.terminalText}\n`;
+       //todo: refactor so switch statement
+       if(this.terminalText === 'clear') {
+         this.linesToBeDisplayed = '';
+       } else if(this.terminalText === 'pls load') {
+         this.linesToBeDisplayed += "> Awesome! Going to the next view. Here it comes!"
+         this.shouldTheInputWork = false;
          this.successCounter = 3;
          const successInterval = setInterval(() => {
          if (this.successCounter === 0) {
             clearInterval(successInterval);
-            this.linesToBeDisplayed += "> Done!\n"
+            this.linesToBeDisplayed += "> Woop!\n"
             return;
           }
            this.linesToBeDisplayed += `> ${this.successCounter} \n`
            this.successCounter -= 1;
          }, 1000);
-       } else {
-         this.counter +=1;
-         this.linesToBeDisplayed += "> You don't like to do what you're told, eh?"
+       } else if (this.terminalText !== '') { //Blank lines aren't unknown commands
+          this.linesToBeDisplayed += `> Unknown command: ${this.terminalText}`;
        }
-
        this.linesToBeDisplayed += "\n";
        this.terminalText = "";
+       this.scrollToBottom();
     }
-  }
+  },
+  mounted() {
+    document.querySelector(".cursor").onblur = function() {
+      this.focus();
+    };
+
+  },
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@keyframes fade-to-white {
+    0%   {background-color: black;}
+    100% {background-color: white;}
+}
+
+img {
+  margin: 10px;
+}
+.border {
+  background-color: transparent;
+  border-radius: 2rem;
+  -webkit-box-shadow: inset 0 0 18rem black,
+  inset 0 0 3rem black,
+  0 0 10rem black;
+  box-shadow: inset 0 0 18rem black,
+  inset 0 0 3rem black,
+  0 0 10rem black;
+  position: absolute;
+  top: 1%;
+  z-index: 99;
+  left: 1%;
+}
 .hello {
-  height: 100vh;
-  width: 100vw;
+  overflow: auto;
+  height: 98vh;
+  width: 98vw;
   background-color: #000000; 
   color: #99ff00;
 }
-.x:after {
-      content: "Loading ...";
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      font-size: 24px;
-      color: #fff;
-      background-color: rgba(mediumspringgreen, 0.5);
+.spinner-is-spinning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  // height: 100vh;
+  width: 100vw;
+  font-size: 24px;
+  overflow: hidden;
+  color:black;
+  animation-fill-mode: forwards;
+  animation-name: fade-to-white;
+  animation-duration: 3s;
 }
 
 input {
@@ -86,13 +145,9 @@ p, input, span, pre {
   color: #99ff00;
   font-size:2em;
   letter-spacing: 0.1em;
-
   font-family: VT323;
-}
-pre {
-  margin-bottom: 0;
-}
-p {
-  margin: 0;
+  &:not(input) {
+    padding-left: 15px;
+  }
 }
 </style>
