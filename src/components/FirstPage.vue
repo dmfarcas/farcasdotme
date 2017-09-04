@@ -27,7 +27,7 @@
 </template>
 
 <script>
-
+import getCommand from '../commands/getCommand';
 
 export default {
   name: 'firstPage',
@@ -51,31 +51,32 @@ export default {
        this.$router.push('pong')
      },
      bamboozle() {
-       if (!this.shouldTheInputWork) return;
+      this.linesToBeDisplayed += `$ ${this.terminalText}\n`;
+      this.linesToBeDisplayed += getCommand(this.terminalText);
+      //  if (!this.shouldTheInputWork) return;
 
-       this.linesToBeDisplayed += `$ ${this.terminalText}\n`;
-       //todo: refactor so switch statement
-       if(this.terminalText === 'clear') {
-         this.linesToBeDisplayed = '';
-       } else if(this.terminalText === 'pls load') {
-         this.linesToBeDisplayed += "> Awesome! Going to the next view. Here it comes!"
-         this.shouldTheInputWork = false;
-         this.successCounter = 3;
-         const successInterval = setInterval(() => {
-         if (this.successCounter === 0) {
-            clearInterval(successInterval);
-            this.linesToBeDisplayed += "> Woop!\n"
-            return;
-          }
-           this.linesToBeDisplayed += `> ${this.successCounter} \n`
-           this.successCounter -= 1;
-         }, 1000);
-       } else if (this.terminalText !== '') { //Blank lines aren't unknown commands
-          this.linesToBeDisplayed += `> Unknown command: ${this.terminalText}`;
-       }
+      //  //todo: refactor so switch statement
+      //  if(this.terminalText === 'clear') {
+      //    this.linesToBeDisplayed = '';
+      //  } else if(this.terminalText === 'pls load') {
+      //    this.linesToBeDisplayed += "> Awesome! Going to the next view. Here it comes!"
+      //    this.shouldTheInputWork = false;
+      //    this.successCounter = 3;
+      //    const successInterval = setInterval(() => {
+      //    if (this.successCounter === 0) {
+      //       clearInterval(successInterval);
+      //       this.linesToBeDisplayed += "> Woop!\n"
+      //       return;
+      //     }
+      //      this.linesToBeDisplayed += `> ${this.successCounter} \n`
+      //      this.successCounter -= 1;
+      //    }, 1000);
+      //  } else if (this.terminalText !== '') { //Blank lines aren't unknown commands
+      //     this.linesToBeDisplayed += `> Unknown command: ${this.terminalText}`;
+      //  }
        this.linesToBeDisplayed += "\n";
        this.terminalText = "";
-       this.scrollToBottom();
+      //  this.scrollToBottom();
     }
   },
   mounted() {
