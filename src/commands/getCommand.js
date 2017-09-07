@@ -9,7 +9,7 @@ export function getCommand(keyword) {
         return help();
     case 'clear':
         output.clear()
-        return;
+        return '';
     case '':
         return '';
     default:

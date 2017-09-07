@@ -1,7 +1,7 @@
 export default class Output {
     constructor() {
         this.inputChar = "$"        
-        this.currentOutput = `${this.inputChar} `;
+        this.currentOutput = ``;
         this.outputChar = ">";
     }
     get current() {

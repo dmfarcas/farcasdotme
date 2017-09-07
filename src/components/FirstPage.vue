@@ -15,10 +15,10 @@
       <a href="https://www.linkedin.com/in/farcas-dan-mihai-518376109/" target="_blank">LinkedIn</a>
     </div> 
     <p>{{ introMessage }}</p>
-    <pre>{{ linesToBeDisplayed }}</pre> 
+    <pre v-if="linesToBeDisplayed !== ''">{{ linesToBeDisplayed }}</pre> 
     
     <div v-if="shouldTheInputWork">
-      <span v-if="linesToBeDisplayed === ''">$ </span><input class="cursor" autofocus v-on:keyup.enter="bamboozle" v-model="terminalText"></input>
+      <span >$ </span><input class="cursor" autofocus v-on:keyup.enter="bamboozle" v-model="terminalText"></input>
     </div>
   </div>
 
@@ -60,6 +60,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.linesToBeDisplayed);
     document.querySelector(".cursor").onblur = function() {
       this.focus();
     };
