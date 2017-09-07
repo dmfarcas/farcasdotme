@@ -1,14 +1,19 @@
 import help from './help'
+import Output from './Output'
 
-export default function getCommand(keyword) {
+export const output = new Output();
+
+export function getCommand(keyword) {
  switch(keyword) {
     case 'help':
         return help();
-        break;
+    case 'clear':
+        output.clear()
+        return;
     case '':
         return '';
     default:
         return `Unknown command: ${keyword}`
-        break;
  }   
 }
+
