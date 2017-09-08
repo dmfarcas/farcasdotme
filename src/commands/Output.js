@@ -7,7 +7,9 @@ export default class Output {
     get current() {
         return this.currentOutput;
     }
-    appendToOutput(output) { 
+    appendToOutput(output, clear) { 
+        console.log(clear);
+        if (clear) return
         this.currentOutput += `${this.outputChar} ${output}\n`;
     }
     clear() {

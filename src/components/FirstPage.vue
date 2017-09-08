@@ -54,7 +54,7 @@ export default {
        this.$router.push('pong')
      },
      bamboozle() {
-       output.appendToOutput(getCommand(this.terminalText));
+       output.appendToOutput(getCommand(this.terminalText), this.terminalText === "clear");
        this.linesToBeDisplayed = output.current;
        this.terminalText = "";
     }
