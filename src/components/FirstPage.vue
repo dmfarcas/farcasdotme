@@ -1,7 +1,7 @@
 <template>
   <div
    v-if="!shouldTheSpinnerSpin"
-   class="hello border">
+   class="hello content">
 <pre>     __
     / _|
     | |_ __ _ _ __ ___ __ _ ___   _ __ ___   ___ 
@@ -18,7 +18,7 @@
     <pre v-if="linesToBeDisplayed !== ''">{{ linesToBeDisplayed }}</pre> 
     
     <div v-if="shouldTheInputWork">
-      <span >$ </span><input class="cursor" autofocus v-on:keyup.enter="bamboozle" v-model="terminalText"></input>
+      <span >$ </span><input class="cursor" autofocus v-on:keydown.enter="bamboozle" v-on:keyup.enter="scrollToBottom" v-model="terminalText"></input>
     </div>
   </div>
 
@@ -48,7 +48,9 @@ export default {
   },
   methods: {
      scrollToBottom() { 
-       window.scrollTo(0, document.body.scrollHeight);
+       const content = document.querySelector('.content');
+       const height = content.scrollHeight
+       content.scrollTo(0, height);
      },
      goToPong() {
        this.$router.push('pong')
@@ -57,10 +59,10 @@ export default {
        output.appendToOutput(getCommand(this.terminalText), this.terminalText === "clear");
        this.linesToBeDisplayed = output.current;
        this.terminalText = "";
+       this.scrollToBottom();
     }
   },
   mounted() {
-    console.log(this.linesToBeDisplayed);
     document.querySelector(".cursor").onblur = function() {
       this.focus();
     };
@@ -91,24 +93,10 @@ pre {
 img {
   margin: 10px;
 }
-.border {
-  background-color: transparent;
-  border-radius: 2rem;
-  -webkit-box-shadow: inset 0 0 18rem black,
-  inset 0 0 3rem black,
-  0 0 10rem black;
-  box-shadow: inset 0 0 18rem black,
-  inset 0 0 3rem black,
-  0 0 10rem black;
-  position: absolute;
-  top: 1%;
-  z-index: 99;
-  left: 1%;
-}
 .hello {
   overflow: auto;
-  height: 98vh;
-  width: 98vw;
+  height: 100vh;
+  width: 100vw;
   background-color: #000000; 
   color: $default-green-color;
 }
