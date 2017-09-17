@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Header, CommandLine, Output} from './components';
-import {getCommand, output} from './lib/OutputGatherer';
-import {bringBackFocus} from './lib/AppHelpers';
+import React, { Component } from 'react';
+import { Header, CommandLine, Output } from './components';
+import { getCommand, output } from './lib/OutputGatherer';
+import { bringBackFocus, scrollToBottom } from './lib/AppHelpers';
 import './App.css';
 
 class App extends Component {
@@ -47,6 +47,7 @@ class App extends Component {
       this.setState({
         arrowKeyPressCounter: 0
       })
+      scrollToBottom('.container');
     }
 
     if (ev.keyCode === up) {

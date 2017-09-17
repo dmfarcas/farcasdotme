@@ -18,13 +18,7 @@ export async function getCommand(keyword) {
     case 'give':
       return randomRedditPicture(tokenized.args)
     case 'history':
-
-      let formattedHistory = ``;
-      output.history.forEach((e, i) => {
-        formattedHistory += `${i}  ${e}\n`
-      });
-
-      return formattedHistory
+      return output.formattedHistory()
     case 'help':
       return help();
     case 'clear':

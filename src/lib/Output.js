@@ -19,8 +19,16 @@ export default class Output {
     return this.history
   }
 
+  formattedHistory() {
+    let formattedHistory = ``;
+    this.history.forEach((e, i) => {
+      formattedHistory += `${i !== 0 ? '> ' : ''} ${i}  ${e}\n`
+    });
+    return formattedHistory;
+  }
+
   appendToOutput(output, type) {
-    if (type === 'input' && output !== 'history') this.addToHistory(output);
+    if (type === 'input' && output !== 'history' && output !== '') this.addToHistory(output);
     if (output === 'clear') return
     this.currentOutput += `${type === 'output' ? this.outputChar : this.inputChar} ${output}\n`;
   }
