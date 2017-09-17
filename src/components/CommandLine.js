@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 import './CommandLine.css';
 
 export const CommandLine = (props) => {
@@ -10,4 +12,10 @@ export const CommandLine = (props) => {
       </form>
     </div>
   )
+}
+
+CommandLine.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  commandLine: PropTypes.string
 }

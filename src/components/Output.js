@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 import './CommandLine.css';
 
 export const Output = (props) => {
@@ -9,4 +11,9 @@ export const Output = (props) => {
       <pre>{output}</pre>
     </div>
   )
+}
+
+
+Output.propTypes = {
+  output: PropTypes.string,
 }
