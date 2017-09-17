@@ -1,4 +1,5 @@
 import help from './help'
+import { randomRedditPicture } from './redditService';
 import Output from './Output'
 
 export const output = new Output();
@@ -15,6 +16,8 @@ function tokenize(string) {
 export async function getCommand(keyword) {
   const tokenized = tokenize(keyword);
   switch (tokenized.command) {
+    case 'give':
+    return randomRedditPicture(tokenized.args)
     case 'help':
       return await help();
     case 'clear':
@@ -23,6 +26,6 @@ export async function getCommand(keyword) {
     case '':
       return await '';
     default:
-      return await `Unknown command: ${keyword}`
+      return `Unknown command: ${keyword}`
   }
 }

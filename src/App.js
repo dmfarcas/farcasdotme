@@ -12,13 +12,14 @@ class App extends Component {
 
   handleSubmit = (ev) => {
     ev.preventDefault()
+    this.setState({commandLine: ''})
+
     getCommand(this.state.commandLine)
     .then(appendThis => {
       output.appendToOutput(appendThis)
-      this.setState({currentOutput: output.current, commandLine: ''});
+      this.setState({currentOutput: output.current});
     })
-    .catch(e => this.setState({currentOutput: e, commandLine: ''}))
-    // output.appendToOutput(outputReturnedForThisCommand);
+    .catch(e => this.setState({currentOutput: e}))
   }
 
   handleInputChange = (ev) => {
