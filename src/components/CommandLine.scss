@@ -1,0 +1,18 @@
+label {
+  margin-right: 15px;
+}
+
+input {
+  outline: none;
+  width: 96vw;
+  border: 0 solid red;
+  background-color: black;
+  border: none;
+  :focus {
+      border: none;
+  }
+}
+
+form {
+  display: inline;
+}
