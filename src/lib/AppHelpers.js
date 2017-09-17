@@ -1,1 +1,3 @@
-export const bringBackFocus =  window.onkeydown = () => document.querySelector("#input").focus(); // returning focus on keydowwn
+export const bringBackFocus = (el) => {
+  window.onkeydown = () => document.querySelector(el).focus(); // returning focus on keydowwn
+}
