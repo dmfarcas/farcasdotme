@@ -8,7 +8,13 @@ export const CommandLine = (props) => {
     <div>
       <form autoComplete="off" onSubmit={props.handleSubmit}>
       <label htmlFor="input">$</label>
-        <input type="text" id="input" onChange={props.handleInputChange} value={props.commandLine}/>
+        <input
+          type="text"
+          id="input"
+          onChange={props.handleInputChange}
+          value={props.commandLine}
+          onKeyDown={props.onKeyDown}
+        />
       </form>
     </div>
   )
@@ -16,6 +22,7 @@ export const CommandLine = (props) => {
 
 CommandLine.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func.isRequired,
   handleInputChange: PropTypes.func.isRequired,
-  commandLine: PropTypes.string
+  value: PropTypes.string
 }
