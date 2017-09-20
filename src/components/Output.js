@@ -5,12 +5,18 @@ import './Output.css';
 
 export const Output = (props) => {
   const containerList = (outputList) => {
-    const text = (output) => <pre className="text-output">{output}</pre>
+    const text = (output) =>
+    <div>
+      <span>></span>
+      <pre className="text-output">{output}</pre>
+    </div>
     const picture = (output) => <img src={output} alt="output"/>
 
     const wrappedElementForType = (e) => {
       if (e.type === 'text') return text(e.output)
-      if (e.type === 'picture') return picture(e.output)
+      if (e.type === 'picture') {
+        return e.output ?  picture(e.output) : text(`Sorry, no ${e.input} found. :()`)
+      }
     }
 
     return (outputList.map((e, i) => {
@@ -18,7 +24,7 @@ export const Output = (props) => {
         <div key={i}>
           <span>$</span><pre className="text-input">{e.input}</pre>
           <br />
-          <span>></span>{wrappedElementForType(e)}
+          {wrappedElementForType(e)}
         </div>
       )
     }))

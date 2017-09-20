@@ -35,8 +35,7 @@ class App extends Component {
         currentOutput: [...this.state.currentOutput, {type: cmd.type, input: this.state.commandLine, output: cmdOutput}],
         commandLine: ''
        });
-       scrollToBottom('.container');
-      //  setTimeout(() => { scrollToBottom('.container'); }, 100)
+       setTimeout(e => scrollToBottom('.container'), 100) // heh heh
     }
   }
 
