@@ -15,7 +15,7 @@ export const Output = (props) => {
     const wrappedElementForType = (e) => {
       if (e.type === 'text') return text(e.output)
       if (e.type === 'picture') {
-        return e.output ?  picture(e.output) : text(`Sorry, no ${e.input} found. :()`)
+        return e.output ?  picture(e.output) : text(`Sorry, nothing found. :(`)
       }
     }
 

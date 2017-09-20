@@ -1,4 +1,4 @@
-import help from './help'
+import { help, cowSay } from './commands'
 import {randomRedditPicture} from './redditService';
 
 function tokenize(string) { // TODO create sanitize
@@ -22,6 +22,11 @@ export async function getCommand(keyword) {
         type: 'text',
         output: help()
       };
+      case 'cowsay':
+        return {
+          type: 'text',
+          output: cowSay(tokenized.args)
+        };
     case '':
       return {
         type: 'text',
