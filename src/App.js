@@ -21,14 +21,23 @@ class App extends Component {
       })
     }
 
-    // async await is love...
-    const cmd = await getCommand(this.state.commandLine);
-    const cmdOutput = await cmd.output;
+    if (this.state.commandLine === 'clear') {
+      this.setState({
+        currentOutput: [],
+        commandLine: ''
+       });
+    } else {
+      // async await is love...
+      const cmd = await getCommand(this.state.commandLine);
+      const cmdOutput = await cmd.output;
 
-    this.setState({
-      currentOutput: [...this.state.currentOutput, {type: cmd.type, input: this.state.commandLine, output: cmdOutput}],
-      commandLine: ''
-     });
+      this.setState({
+        currentOutput: [...this.state.currentOutput, {type: cmd.type, input: this.state.commandLine, output: cmdOutput}],
+        commandLine: ''
+       });
+    }
+
+
   }
 
   handleInputChange = (ev) => {

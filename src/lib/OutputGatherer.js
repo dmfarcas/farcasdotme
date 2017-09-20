@@ -1,8 +1,5 @@
 import help from './help'
 import {randomRedditPicture} from './redditService';
-import Output from './Output'
-
-export const output = new Output();
 
 function tokenize(string) { // TODO create sanitize
   const tokenized = string.split(" ");
@@ -20,19 +17,11 @@ export async function getCommand(keyword) {
         type: 'picture',
         output: randomRedditPicture(tokenized.args)
       }
-    case 'history':
-      return {
-        type: 'text',
-        output: output.formattedHistory()
-      }
     case 'help':
       return {
         type: 'text',
         output: help()
       };
-    case 'clear':
-      output.clear()
-      return 'clear';
     case '':
       return {
         type: 'text',
