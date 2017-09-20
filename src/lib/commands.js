@@ -1,6 +1,9 @@
 export const help = () => {
     return `give <thing> -- returns a picture of a <thing>. Try 'give cats'.
-cowsay <thing>. Try 'cowsay hello'.`
+cowsay <thing>. Try 'cowsay hello'.
+ls -- does nothing.
+mail -- displays email address
+TODO: mail sender, weather, github project list, imdb movies`
 }
 
 export const cowSay = (text) => {
@@ -16,4 +19,13 @@ export const cowSay = (text) => {
                 ||----w |
                 ||     ||
 `
+}
+
+export const ls = () => {
+    return `Nothing to list here...`
+}
+
+
+export const mail = () => {
+    return `Say hi at dan@farcas.me!`
 }
