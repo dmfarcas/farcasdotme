@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { Header, CommandLine, Output } from './components';
-import { getCommand, output } from './lib/OutputGatherer';
+import { getCommand } from './lib/OutputGatherer';
 import { bringBackFocus, scrollToBottom } from './lib/AppHelpers';
 import './App.css';
 
 class App extends Component {
   state = {
-    currentOutput: output.current,
+    currentOutput: [],
     commandLine: '',
     commandHistory: [],
     arrowKeyPressCounter: 0
   }
 
-  handleSubmit = (ev) => {
+  handleSubmit = async (ev) => {
     ev.preventDefault()
-    this.setState({commandLine: ''})
-
-    output.appendToOutput(this.state.commandLine, 'input')
 
     if (this.state.commandLine !== '') {
       this.setState({
@@ -24,21 +21,21 @@ class App extends Component {
       })
     }
 
-    this.setState({currentOutput: output.current});
+    // async await is love...
+    const cmd = await getCommand(this.state.commandLine);
+    const cmdOutput = await cmd.output;
 
-    getCommand(this.state.commandLine)
-    .then(appendThis => {
-      output.appendToOutput(appendThis, 'output')
-      this.setState({currentOutput: output.current});
-    })
-    .catch(e => this.setState({currentOutput: e}))
+    this.setState({
+      currentOutput: [...this.state.currentOutput, {type: cmd.type, input: this.state.commandLine, output: cmdOutput}],
+      commandLine: ''
+     });
   }
 
   handleInputChange = (ev) => {
     this.setState({commandLine: ev.target.value});
   }
 
-  onKeyDown = (ev) => {
+  onKeyDown = (ev) => { // TODO dead code, yay.
     const up = 38;
     const down = 40;
     const enter = 13;
@@ -75,7 +72,8 @@ class App extends Component {
     return (
       <div className="container">
         <Header/>
-        <Output output={this.state.currentOutput}/>
+        <Output
+          output={this.state.currentOutput}/>
         <CommandLine
           commandLine={this.state.commandLine}
           handleInputChange={this.handleInputChange}

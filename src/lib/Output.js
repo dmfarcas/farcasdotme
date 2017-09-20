@@ -1,7 +1,7 @@
 export default class Output {
   constructor() {
     this.inputChar = "$";
-    this.currentOutput = ``;
+    this.currentOutput = [];
     this.outputChar = ">";
     this.loadingChars = ['◐', '◓', '◑', '◒'] // TODO TODO TODO
     this.history = []
@@ -22,15 +22,15 @@ export default class Output {
   formattedHistory() {
     let formattedHistory = ``;
     this.history.forEach((e, i) => {
-      formattedHistory += `${i !== 0 ? '> ' : ''} ${i}  ${e}\n`
+      formattedHistory += `${i !== 0 ? '> ' : ''} ${i}  ${e}\n` // oh wow
     });
     return formattedHistory;
   }
 
-  appendToOutput(output, type) {
-    if (type === 'input' && output !== 'history' && output !== '') this.addToHistory(output);
-    if (output === 'clear') return
-    this.currentOutput += `${type === 'output' ? this.outputChar : this.inputChar} ${output}\n`;
+  appendToOutput(output/*, type*/) {
+    // if (type === 'input' && output !== 'history' && output !== '') this.addToHistory(output);
+    // if (output === 'clear') return
+    // this.currentOutput += `${type === 'output' ? this.outputChar : this.inputChar} ${output}\n`;
   }
 
   clear() {

@@ -4,7 +4,7 @@ import Output from './Output'
 
 export const output = new Output();
 
-function tokenize(string) {
+function tokenize(string) { // TODO create sanitize
   const tokenized = string.split(" ");
   return {
     'command': tokenized[0],
@@ -16,17 +16,32 @@ export async function getCommand(keyword) {
   const tokenized = tokenize(keyword);
   switch (tokenized.command) {
     case 'give':
-      return randomRedditPicture(tokenized.args)
+      return {
+        type: 'picture',
+        output: randomRedditPicture(tokenized.args)
+      }
     case 'history':
-      return output.formattedHistory()
+      return {
+        type: 'text',
+        output: output.formattedHistory()
+      }
     case 'help':
-      return help();
+      return {
+        type: 'text',
+        output: help()
+      };
     case 'clear':
       output.clear()
       return 'clear';
     case '':
-      return '';
+      return {
+        type: 'text',
+        output: ''
+      };
     default:
-      return `Unknown command: ${keyword}`
+      return {
+        type: 'text',
+        output: `Unknown command: ${keyword}`
+      }
   }
 }

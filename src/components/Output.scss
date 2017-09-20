@@ -1,0 +1,16 @@
+.text-output, .text-input{
+  display: inline-block;
+}
+
+pre {
+  vertical-align: text-bottom;
+}
+
+img {
+  width: 19%;
+  object-fit: cover;
+  height: auto;
+  border: azure;
+  border-style: outset;
+  border-color: #99ff00;
+}
