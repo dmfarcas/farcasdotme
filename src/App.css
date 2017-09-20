@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=VT323");
 .container {
   overflow: auto;
-  height: 100vh;
-  width: 100vw;
-  background-color: #000000;
+  height: 100%;
   color: #99ff00; }
   .container ::-webkit-scrollbar {
     z-index: 22;
