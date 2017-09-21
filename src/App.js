@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, CommandLine, Output } from './components';
 import { getCommand } from './lib/OutputGatherer';
-import { bringBackFocus, scrollToBottom } from './lib/AppHelpers';
+import { bringBackFocus, scrollToBottom } from './lib/helpers';
 import './App.css';
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
 
     if (this.state.commandLine !== '') {
       this.setState({
-        commandHistory: [...this.state.commandHistory, this.state.commandLine]
+        commandHistory: [this.state.commandLine, ...this.state.commandHistory]
       })
     }
 
@@ -35,7 +35,7 @@ class App extends Component {
         currentOutput: [...this.state.currentOutput, {type: cmd.type, input: this.state.commandLine, output: cmdOutput}],
         commandLine: ''
        });
-       setTimeout(e => scrollToBottom('.container'), 100) // heh heh
+       setTimeout(e => scrollToBottom('.container'), 500) // heh heh
     }
   }
 
@@ -58,17 +58,20 @@ class App extends Component {
     if (ev.keyCode === up) {
       ev.preventDefault();
       if (this.state.arrowKeyPressCounter === this.state.commandHistory.length) return;
-      // this.setState({
-      //   arrowKeyPressCounter: this.state.arrowKeyPressCounter+=1,
-      //   commandLine: this.state.commandHistory[this.state.arrowKeyPressCounter+=1]
-      // }) //TODO
+
+      this.setState((prevState, props) => ({
+        commandLine: this.state.commandHistory[this.state.arrowKeyPressCounter],
+        arrowKeyPressCounter: this.state.arrowKeyPressCounter  + 1,
+      }))
+
     } else if(ev.keyCode === down) {
       ev.preventDefault();
       if (this.state.arrowKeyPressCounter === 0) return
-      // this.setState({
-      //   arrowKeyPressCounter: this.state.arrowKeyPressCounter-=1,
-      //   commandLine: this.state.commandHistory[this.state.arrowKeyPressCounter-=1]
-      // }) //TODO
+
+      this.setState((prevState, props) => ({
+        commandLine: this.state.commandHistory[this.state.arrowKeyPressCounter - 1],
+        arrowKeyPressCounter: this.state.arrowKeyPressCounter - 1,
+      }))
     }
   }
 

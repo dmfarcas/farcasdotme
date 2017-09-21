@@ -1,3 +1,5 @@
+import ghPinnedRepos from 'gh-pinned-repos';
+
 export const randomRedditPicture = async (subreddit) => {
   const apiUrl = `https://www.reddit.com/r/${subreddit}/.json`;
   const getSubredditData = async (subreddit) => await (await fetch(apiUrl)).json()
@@ -19,3 +21,15 @@ export const giphyService = async (tag) => {
 
   return gif.data.image_url;
 }
+
+
+export const pinnedRepos = async (user) => {
+  const repos = await ghPinnedRepos(user);
+
+  return repos.toString().replace(/,/g, "\n");
+}
+
+// pinnedRepos('dmfarcas')
+// .then(e => {
+//   console.log(e)
+// })

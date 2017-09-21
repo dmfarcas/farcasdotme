@@ -1,10 +1,11 @@
 export const help = () => {
     return `give <thing> -- returns a picture of a <thing>. Try 'give cats'.
-cowsay <thing>. Try 'cowsay hello'.
-ls -- does nothing.
+cowsay <thing>. Try 'cowsay hello'
+ls -- does nothing
 mail -- displays email address
 gif <thing> --returns a gif of a <thing>. Try 'gif cat'
-TODO: mail sender, weather, github project list, imdb movies`
+pinned -- returns a list of pinned GitHub repos
+TODO: mail sender, weather, imdb movies`
 }
 
 export const cowSay = (text) => {

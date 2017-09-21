@@ -5,6 +5,5 @@ export const bringBackFocus = (el) => {
 export const scrollToBottom = (el) => {
    const content = document.querySelector(el);
    const height = content.scrollHeight
-   console.log(height);
    window.scrollTo(0, height);
  }

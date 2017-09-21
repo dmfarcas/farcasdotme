@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import './CommandLine.css';
 
 export const CommandLine = (props) => {
+  console.log(props.commandLine)
+
   return (
     <div>
       <form autoComplete="off" onSubmit={props.handleSubmit}>
