@@ -2,13 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 import './CommandLine.css';
+import logo from "../assets/loader_big_w.gif";
 
 export const CommandLine = (props) => {
   return (
     <div>
       <form autoComplete="off" onSubmit={props.handleSubmit}>
-      <label htmlFor="input">$</label>
+
+
+      {props.loading ? <img className="loading" src={logo} alt="loading"/> : ""}
+      <label htmlFor="input">{!props.loading ? "$" : "Loading ..."}</label>
         <input
+          hidden={props.loading}
           type="text"
           id="input"
           onChange={props.handleInputChange}
