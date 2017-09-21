@@ -1,5 +1,4 @@
-import { help, cowSay, ls, mail } from './commands'
-import {randomRedditPicture, giphyService, pinnedRepos} from './services';
+import { help, cowSay, ls, mail, randomRedditPicture, giphyService, pinnedRepos } from './commands'
 
 function tokenize(string) { // TODO create sanitize
   const tokenized = string.split(" ");

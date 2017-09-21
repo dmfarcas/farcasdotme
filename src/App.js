@@ -9,10 +9,12 @@ class App extends Component {
     currentOutput: [],
     commandLine: '',
     commandHistory: [],
-    arrowKeyPressCounter: 0
+    arrowKeyPressCounter: 0,
+    loading: false
   }
 
   handleSubmit = async (ev) => {
+    this.setState({loading: true});
     ev.preventDefault()
 
     if (this.state.commandLine !== '') {
@@ -24,7 +26,8 @@ class App extends Component {
     if (this.state.commandLine === 'clear') {
       this.setState({
         currentOutput: [],
-        commandLine: ''
+        commandLine: '',
+        loading: false
        });
     } else {
       // async await is love...
@@ -33,7 +36,8 @@ class App extends Component {
 
       this.setState({
         currentOutput: [...this.state.currentOutput, {type: cmd.type, input: this.state.commandLine, output: cmdOutput}],
-        commandLine: ''
+        commandLine: '',
+        loading: false
        });
        setTimeout(e => scrollToBottom('.container'), 500) // heh heh
     }
@@ -43,7 +47,7 @@ class App extends Component {
     this.setState({commandLine: ev.target.value});
   }
 
-  onKeyDown = (ev) => { // TODO dead code, yay.
+  onKeyDown = (ev) => {
     const up = 38;
     const down = 40;
     const enter = 13;
@@ -76,6 +80,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    getCommand('help').then(cmd => this.setState({currentOutput: [{type: cmd.type, input: 'help', output: cmd.output}]}))
     bringBackFocus('#input');
   }
 
@@ -86,6 +91,7 @@ class App extends Component {
         <Output
           output={this.state.currentOutput}/>
         <CommandLine
+          loading={this.state.loading}
           commandLine={this.state.commandLine}
           handleInputChange={this.handleInputChange}
           onKeyDown={this.onKeyDown}
