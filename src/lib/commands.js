@@ -3,6 +3,7 @@ export const help = () => {
 cowsay <thing>. Try 'cowsay hello'.
 ls -- does nothing.
 mail -- displays email address
+gif <thing> --returns a gif of a <thing>. Try 'gif cat'
 TODO: mail sender, weather, github project list, imdb movies`
 }
 

@@ -1,5 +1,6 @@
 export const randomRedditPicture = async (subreddit) => {
-  const getSubredditData = async (subreddit) => await (await fetch(`https://www.reddit.com/r/${subreddit}/.json`)).json()
+  const apiUrl = `https://www.reddit.com/r/${subreddit}/.json`;
+  const getSubredditData = async (subreddit) => await (await fetch(apiUrl)).json()
   const sub = await getSubredditData(subreddit);
 
   const listOfPictures = sub.data.children
@@ -12,6 +13,9 @@ export const randomRedditPicture = async (subreddit) => {
   return picture
 }
 
-export const favoriteMovieList = () => {
-  
+export const giphyService = async (tag) => {
+  const apiUrl = `https://api.giphy.com/v1/gifs/random?api_key=${process.env.REACT_APP_GIPHY_KEY}`;
+  const gif = await(await fetch(`${apiUrl}&tag=${tag}&rating=G`)).json();
+
+  return gif.data.image_url;
 }
