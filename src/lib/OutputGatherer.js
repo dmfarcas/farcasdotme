@@ -1,4 +1,4 @@
-import { help, cowSay, ls, mail, randomRedditPicture, giphyService, pinnedRepos } from './commands'
+import { help, cowSay, ls, mail, randomRedditPicture, giphyService } from './commands'
 
 function tokenize(string) { // TODO create sanitize
   const tokenized = string.split(" ");
@@ -30,11 +30,6 @@ export async function getCommand(keyword) {
         return {
           type: 'text',
           output: mail()
-        };
-      case 'pinned':
-        return {
-          type: 'text',
-          output: pinnedRepos('dmfarcas')
         };
       case 'cowsay':
         return {
