@@ -1,4 +1,5 @@
 import ghPinnedRepos from 'gh-pinned-repos';
+import React from 'react'
 
 export const randomRedditPicture = async (subreddit) => {
   const apiUrl = `https://www.reddit.com/r/${subreddit}/.json`;
@@ -26,10 +27,8 @@ export const giphyService = async (tag) => {
 export const pinnedRepos = async (user) => {
   const repos = await ghPinnedRepos(user);
 
-  return repos.toString().replace(/,/g, "\n");
+  return repos.map((repo,i) => {
+    const url = `https://github.com/${repo}`
+    return <div className="git-links" key={i}><a rel="noopener noreferrer" href={url} target="_blank">{repo}</a></div>
+  })
 }
-
-// pinnedRepos('dmfarcas')
-// .then(e => {
-//   console.log(e)
-// })
