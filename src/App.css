@@ -13,10 +13,22 @@
   .container ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.3); }
 
-p, input, span, pre, a, label {
+p,
+input,
+span,
+pre,
+a,
+label {
   color: #99ff00;
-  font-size: 2em;
   letter-spacing: 0.1em;
   font-family: VT323; }
-  p:not(input), input:not(input), span:not(input), pre:not(input), a:not(input), label:not(input) {
+  p:not(input),
+  input:not(input),
+  span:not(input),
+  pre:not(input),
+  a:not(input),
+  label:not(input) {
     padding-left: 15px; }
+
+* {
+  font-size: 1em; }

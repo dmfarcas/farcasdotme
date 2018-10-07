@@ -1,11 +1,20 @@
-import { help, cowSay, ls, mail, randomRedditPicture, giphyService } from './commands'
+import {
+  help,
+  cowSay,
+  ls,
+  mail,
+  randomRedditPicture,
+  giphyService,
+  repos
+} from './commands';
 
-function tokenize(string) { // TODO create sanitize
-  const tokenized = string.split(" ");
+function tokenize(string) {
+  // TODO create sanitize
+  const tokenized = string.split(' ');
   return {
-    'command': tokenized[0],
-    'args': tokenized.slice(1, tokenized.length)
-  }
+    command: tokenized[0],
+    args: tokenized.slice(1, tokenized.length)
+  };
 }
 
 export async function getCommand(keyword) {
@@ -15,32 +24,37 @@ export async function getCommand(keyword) {
       return {
         type: 'picture',
         output: randomRedditPicture(tokenized.args)
-      }
+      };
     case 'help':
       return {
         type: 'text',
         output: help()
       };
-      case 'ls':
-        return {
-          type: 'text',
-          output: ls()
-        };
-      case 'mail':
-        return {
-          type: 'text',
-          output: mail()
-        };
-      case 'cowsay':
-        return {
-          type: 'text',
-          output: cowSay(tokenized.args)
-        };
-      case 'gif':
-        return {
-          type: 'picture',
-          output: giphyService(tokenized.args)
-        };
+    case 'ls':
+      return {
+        type: 'text',
+        output: ls()
+      };
+    case 'mail':
+      return {
+        type: 'text',
+        output: mail()
+      };
+    case 'cowsay':
+      return {
+        type: 'text',
+        output: cowSay(tokenized.args)
+      };
+    case 'gif':
+      return {
+        type: 'picture',
+        output: giphyService(tokenized.args)
+      };
+    case 'repos':
+      return {
+        type: 'multipleLineText',
+        output: repos()
+      };
     case '':
       return {
         type: 'text',
@@ -50,6 +64,6 @@ export async function getCommand(keyword) {
       return {
         type: 'text',
         output: `Unknown command: ${keyword}`
-      }
+      };
   }
 }
