@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=VT323');
-
-$default-green-color:  #99ff00;
-
+$default-green-color: #99ff00;
 .container {
   overflow: auto;
   height: 100%;
@@ -11,7 +9,7 @@ $default-green-color:  #99ff00;
     width: 1em;
   }
   ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
   ::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.1);
@@ -21,13 +19,20 @@ $default-green-color:  #99ff00;
   }
 }
 
-
-p, input, span, pre, a, label {
+p,
+input,
+span,
+pre,
+a,
+label {
   color: $default-green-color;
-  font-size:2em;
   letter-spacing: 0.1em;
   font-family: VT323;
   &:not(input) {
     padding-left: 15px;
   }
+}
+
+* {
+  font-size: 1em;
 }
