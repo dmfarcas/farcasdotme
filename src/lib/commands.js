@@ -7,6 +7,7 @@ cowsay <thing>. Try 'cowsay hello'
 ls -- does nothing
 mail -- displays email address
 repos -- a list of my github repos
+reverse <string> -- reverses a string
 gif <thing> --returns a gif of a <thing>. Try 'gif cat'`;
 };
 
@@ -76,4 +77,21 @@ const giphyService = async tag => {
   return gif.data.image_url;
 };
 
-export { help, cowSay, ls, mail, randomRedditPicture, giphyService, repos };
+const reverse = string =>
+  string.reverse().map(token =>
+    token
+      .split('')
+      .reverse()
+      .join('')
+  );
+
+export {
+  help,
+  cowSay,
+  ls,
+  mail,
+  randomRedditPicture,
+  giphyService,
+  repos,
+  reverse
+};

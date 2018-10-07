@@ -5,7 +5,8 @@ import {
   mail,
   randomRedditPicture,
   giphyService,
-  repos
+  repos,
+  reverse
 } from './commands';
 
 function tokenize(string) {
@@ -44,6 +45,11 @@ export async function getCommand(keyword) {
       return {
         type: 'text',
         output: cowSay(tokenized.args)
+      };
+    case 'reverse':
+      return {
+        type: 'text',
+        output: reverse(tokenized.args)
       };
     case 'gif':
       return {
