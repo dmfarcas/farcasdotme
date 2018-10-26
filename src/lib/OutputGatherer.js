@@ -1,6 +1,7 @@
 import {
   help,
   cowSay,
+  no,
   ls,
   mail,
   randomRedditPicture,
@@ -35,6 +36,12 @@ export async function getCommand(keyword) {
       return {
         type: 'text',
         output: ls()
+      };
+
+    case 'no':
+      return {
+        type: 'text',
+        output: no()
       };
     case 'mail':
       return {

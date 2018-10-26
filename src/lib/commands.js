@@ -8,6 +8,7 @@ ls -- does nothing
 mail -- displays email address
 repos -- a list of my github repos
 reverse <string> -- reverses a string
+no -- no
 gif <thing> --returns a gif of a <thing>. Try 'gif cat'`;
 };
 
@@ -44,6 +45,8 @@ const repos = async () => {
 const mail = () => {
   return `Say hi at dan@farcas.me!`;
 };
+
+const no = () => `Nope.`;
 
 const randomRedditPicture = async subreddit => {
   const apiUrl = `https://www.reddit.com/r/${subreddit}/.json`;
@@ -88,6 +91,7 @@ const reverse = string =>
 export {
   help,
   cowSay,
+  no,
   ls,
   mail,
   randomRedditPicture,
